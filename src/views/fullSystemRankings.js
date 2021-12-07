@@ -15,18 +15,20 @@ export default function FullSystemRankings() {
     };
   }, []);
 
-  const sortedSystems = teams.sort(
-    (a, b) => a.systemRankings - b.systemRankings,
+  const sortedSystems = teams.sort((a, b) => a.systemRanking - b.systemRanking);
+  const systemRanked = sortedSystems.filter(
+    (allTeams) => allTeams.systemRanking <= 30,
   );
+
   return (
     <div>
       {teams ? (
         <>
           <h1 className="text-center">Full System Rankings</h1>
           <div className="d-flex flex-wrap">
-            {sortedSystems.map((allTeams) => (
+            {systemRanked.map((allTeams) => (
               <AllTeamCards
-                key={allTeams.firebaseKey}
+                key={allTeams.teamId}
                 allTeams={allTeams}
                 setTeams={setTeams}
               />
