@@ -7,8 +7,7 @@ export default function TeamCards({ allTeams }) {
     <div>
       <Container className="team-card-container">
         <Card className="team-cards">
-          <p>{allTeams.location}</p>
-          <p>{allTeams.name}</p>
+          <p>{allTeams.location} {allTeams.name}</p>
           <li>{allTeams.systemRanking}</li>
         </Card>
       </Container>

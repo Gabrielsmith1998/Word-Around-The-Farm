@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import ProspectCards from '../api/compontents/ProspectCard';
 import TeamCards from '../api/compontents/TeamCards';
 import { getPlayers, getSystems } from '../api/data/farmData';
-import { signOutUser } from '../api/auth';
 
 export default function Home({ user }) {
   const [prospect, setProspects] = useState([]);
@@ -32,7 +31,7 @@ export default function Home({ user }) {
 
   const sorted = prospect.sort((a, b) => a.leagueRanking - b.leagueRanking);
   const leagueRanked = sorted.filter(
-    (allProspects) => allProspects.leagueRanking <= 10,
+    (allProspects) => allProspects.leagueRanking <= 10 && allProspects.leagueRanking >= 1,
   );
 
   const sortedSystems = teams.sort((a, b) => a.systemRanking - b.systemRanking);
@@ -45,10 +44,7 @@ export default function Home({ user }) {
       {prospect ? (
         <>
           <div>
-            <button type="button" className="btn btn-danger" onClick={signOutUser}>
-              Sign Out
-            </button>
-            <h1 className="text-center">Player Rankings</h1>
+            <h1 className="text-center">Top 10 Prospects</h1>
             <div className="d-flex flex-wrap">
               {leagueRanked.map((allProspects) => (
                 <ProspectCards
@@ -67,14 +63,14 @@ export default function Home({ user }) {
       <div>
         {teams ? (
           <>
-            <h1 className="text-center">Team Rankings</h1>
+            <h1 className="text-center">Top 10 Farm Systems</h1>
             <Link className="nav-link active" to="/full-rankings">
               Full Rankings
             </Link>
             <div className="d-flex flex-wrap">
               {systemRanked.map((allTeams) => (
                 <TeamCards
-                  key={allTeams.firebaseKey}
+                  key={allTeams.teamId}
                   allTeams={allTeams}
                   setTeams={setTeams}
                   user={user}

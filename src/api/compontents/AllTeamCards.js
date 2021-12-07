@@ -8,7 +8,7 @@ export default function AllTeamCards({ allTeams }) {
     <div>
       <Container className="team-card-container">
         <Card className="team-cards">
-          <Link className="nav-link active" to="/top-5-prospects">
+          <Link className="nav-link active" to={`/top-5-prospects/${allTeams.teamId}`}>
             Top 5 Prospects
           </Link>
           <p>{allTeams.location}</p>
