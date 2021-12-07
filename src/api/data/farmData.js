@@ -52,9 +52,9 @@ const getSinglePlayer = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const updatePlayer = (obj) => new Promise((resolve, reject) => {
-  axios.patch(`${baseURL}/allProspects/${obj.firebaseKey}.json`, obj).then(() => {
-    getPlayers().then(resolve);
-  }).catch(reject);
+  axios.patch(`${baseURL}/allProspects/${obj.firebaseKey}.json`, obj)
+    .then(() => getPlayers().then(resolve))
+    .catch(reject);
 });
 
 const getSingleTeam = (firebaseKey) => new Promise((resolve, reject) => {
