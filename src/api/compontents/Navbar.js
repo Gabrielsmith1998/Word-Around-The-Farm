@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import { signOutUser } from '../auth';
+import { signInUser, signOutUser } from '../auth';
 
 export default function Navagation({ user }) {
   const history = useHistory();
@@ -26,9 +26,23 @@ export default function Navagation({ user }) {
             Dev Portal
           </button>
         )}
-        <button type="button" className="btn btn-danger" onClick={signOutUser}>
-          Sign Out
-        </button>
+        {user ? (
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={signOutUser}
+          >
+            Sign Out
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={signInUser}
+          >
+            Sign In
+          </button>
+        )}
       </Navbar>
     </div>
   );

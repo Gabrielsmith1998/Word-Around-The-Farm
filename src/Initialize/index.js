@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import Routes from '../routes';
-import SignIn from '../views/SignIn';
 import Navagation from '../api/compontents/Navbar';
 
 function Initialize() {
@@ -27,15 +26,8 @@ function Initialize() {
 
   return (
     <div>
-      {user ? (
-        <>
-          {' '}
-          <Navagation user={user} />
-          <Routes user={user} />
-        </>
-      ) : (
-        <SignIn />
-      )}
+      <Navagation user={user} />
+      <Routes user={user} />
     </div>
   );
 }

@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   createPlayer,
-  getPlayers,
   getSinglePlayer,
   getSystems,
   updatePlayer,
 } from '../data/farmData';
 
 const initialState = {
+  firebaseKey: '',
   name: '',
   leagueRanking: '',
   orgRanking: '',
   teamId: '',
 };
 
-export default function PlayerForm({ setProspects }) {
-  const { teamId } = useParams();
+export default function PlayerForm() {
+  const { teamId, firebaseKey } = useParams();
   const [formInput, setFormInput] = useState(initialState);
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    if (teamId) {
-      getSinglePlayer(teamId).then(() => {
-        setFormInput(teamId);
+    if (firebaseKey) {
+      getSinglePlayer(firebaseKey).then((obj) => {
+        setFormInput({
+          name: obj.name,
+          leagueRanking: obj.leagueRanking,
+          orgRanking: obj.orgRanking,
+          teamId: obj.teamId,
+          firebaseKey: obj.firebaseKey,
+        });
       });
     } else {
       setFormInput(initialState);
@@ -77,15 +82,13 @@ export default function PlayerForm({ setProspects }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (teamId) {
+    if (firebaseKey) {
       updatePlayer(formInput).then(() => {
-        getPlayers().then(setProspects);
         resetForm();
         history.push('/');
       });
     } else {
       createPlayer(formInput).then(() => {
-        getPlayers().then(setProspects);
         resetForm();
         history.push('/');
       });
@@ -99,6 +102,7 @@ export default function PlayerForm({ setProspects }) {
           className="search-bar"
           placeholder="Players Name"
           onChange={handleChange}
+          value={formInput.name}
         />
         <select
           className="dropDown"
@@ -155,7 +159,3 @@ export default function PlayerForm({ setProspects }) {
     </div>
   );
 }
-
-PlayerForm.propTypes = {
-  setProspects: PropTypes.func.isRequired,
-};
