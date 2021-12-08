@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import AllTeamCards from '../api/compontents/AllTeamCards';
 import { getSystems } from '../api/data/farmData';
 
-export default function FullSystemRankings() {
+export default function FullSystemRankings({ user }) {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function FullSystemRankings() {
                 key={allTeams.teamId}
                 allTeams={allTeams}
                 setTeams={setTeams}
+                user={user}
               />
             ))}
           </div>
@@ -41,3 +43,11 @@ export default function FullSystemRankings() {
     </div>
   );
 }
+
+FullSystemRankings.propTypes = {
+  user: PropTypes.shape(PropTypes.obj),
+};
+
+FullSystemRankings.defaultProps = {
+  user: null,
+};
