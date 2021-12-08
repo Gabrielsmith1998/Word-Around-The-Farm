@@ -27,13 +27,22 @@ export default function Navagation({ user }) {
           </button>
         )}
         {user ? (
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={signOutUser}
-          >
-            Sign Out
-          </button>
+          <>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => history.push(`/watched-prospects/${user.uid}`)}
+            >
+              My Watched Prospects
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={signOutUser}
+            >
+              Sign Out
+            </button>
+          </>
         ) : (
           <button
             type="button"

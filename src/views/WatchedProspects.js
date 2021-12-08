@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import ProspectCards from '../api/compontents/ProspectCard';
-import { teamsTopProspects } from '../api/data/farmData';
+import { getWatchedProspects } from '../api/data/farmData';
 
-export default function TopFiveProspects({ user }) {
+export default function WatchedProspect({ user }) {
   const [prospect, setProspects] = useState([]);
-  const { teamId } = useParams();
+  const { uid } = useParams();
 
   useEffect(() => {
-    teamsTopProspects(teamId).then(setProspects);
+    getWatchedProspects(uid).then(setProspects);
   });
 
   const sortedProspects = prospect.sort((a, b) => a.orgRanking - b.orgRanking);
@@ -43,10 +43,10 @@ export default function TopFiveProspects({ user }) {
   );
 }
 
-TopFiveProspects.propTypes = {
+WatchedProspect.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
 };
 
-TopFiveProspects.defaultProps = {
+WatchedProspect.defaultProps = {
   user: null,
 };

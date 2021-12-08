@@ -8,6 +8,8 @@ import EditProspect from '../views/EditProspect';
 import FullSystemRankings from '../views/fullSystemRankings';
 import Home from '../views/home';
 import TopFiveProspects from '../views/TopFiveProspects';
+import EditTeam from '../views/EditTeam';
+import WatchedProspect from '../views/WatchedProspects';
 
 export default function Routes({ user }) {
   return (
@@ -17,24 +19,36 @@ export default function Routes({ user }) {
           <Home user={user} />
         </Route>
         <Route exact path="/full-rankings">
-          <FullSystemRankings />
+          <FullSystemRankings user={user} />
         </Route>
         <Route
           exact
+          path="/watched-prospects/:uid"
+          component={() => <WatchedProspect user={user} />}
+        />
+        <Route
+          exact
           path="/top-5-prospects/:teamId"
-          component={TopFiveProspects}
+          component={() => <TopFiveProspects user={user} />}
         />
         <Route exact path="/devPortal">
-          <DevLinks />
+          <DevLinks user={user} />
         </Route>
-        <Route exact path="/edit/:firebaseKey">
-          <EditProspect user={user} />
-        </Route>
+        <Route
+          exact
+          path="/edit/:firebaseKey"
+          component={() => <EditProspect user={user} />}
+        />
+        <Route
+          exact
+          path="/editTeams/:teamId"
+          component={() => <EditTeam user={user} />}
+        />
         <Route exact path="/createProspects">
-          <PlayerForm />
+          <PlayerForm user={user} />
         </Route>
         <Route exact path="/createTeams">
-          <TeamForm />
+          <TeamForm user={user} />
         </Route>
       </Switch>
     </>
