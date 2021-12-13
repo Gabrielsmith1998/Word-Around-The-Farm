@@ -17,7 +17,7 @@ export default function Navagation({ user }) {
         >
           Home
         </button>
-        {user?.isAdmin && (
+        {user?.isAdmin ? (
           <button
             className="btn btn-info"
             type="button"
@@ -25,7 +25,7 @@ export default function Navagation({ user }) {
           >
             Dev Portal
           </button>
-        )}
+        ) : ('')}
         {user ? (
           <>
             <button
@@ -34,6 +34,13 @@ export default function Navagation({ user }) {
               onClick={() => history.push(`/watched-prospects/${user.uid}`)}
             >
               My Watched Prospects
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => history.push('/scout-talk')}
+            >
+              Scout Talk
             </button>
             <button
               type="button"
@@ -62,5 +69,5 @@ Navagation.propTypes = {
 };
 
 Navagation.defaultProps = {
-  user: {},
+  user: null,
 };

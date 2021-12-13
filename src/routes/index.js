@@ -10,6 +10,9 @@ import Home from '../views/home';
 import TopFiveProspects from '../views/TopFiveProspects';
 import EditTeam from '../views/EditTeam';
 import WatchedProspect from '../views/WatchedProspects';
+import ScoutTalk from '../views/ScoutTalk';
+import ScoutForm from '../api/compontents/ScoutForm';
+import EditPost from '../views/EditScoutPost';
 
 export default function Routes({ user }) {
   return (
@@ -28,6 +31,11 @@ export default function Routes({ user }) {
         />
         <Route
           exact
+          path="/scout-form/:uid"
+          component={() => <ScoutForm user={user} />}
+        />
+        <Route
+          exact
           path="/top-5-prospects/:teamId"
           component={() => <TopFiveProspects user={user} />}
         />
@@ -41,6 +49,11 @@ export default function Routes({ user }) {
         />
         <Route
           exact
+          path="/edit-post/:firebaseKey"
+          component={() => <EditPost user={user} />}
+        />
+        <Route
+          exact
           path="/editTeams/:teamId"
           component={() => <EditTeam user={user} />}
         />
@@ -49,6 +62,9 @@ export default function Routes({ user }) {
         </Route>
         <Route exact path="/createTeams">
           <TeamForm user={user} />
+        </Route>
+        <Route exact path="/scout-talk">
+          <ScoutTalk user={user} />
         </Route>
       </Switch>
     </>

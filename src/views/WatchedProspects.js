@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ProspectCards from '../api/compontents/ProspectCard';
 import { getWatchedProspects } from '../api/data/farmData';
 
@@ -21,12 +21,6 @@ export default function WatchedProspect({ user }) {
     <>
       {prospect ? (
         <>
-          <Link
-            className="nav-link active"
-            to="/full-rankings"
-          >
-            Back
-          </Link>
           {prospectRanked.map((allProspects) => (
             <ProspectCards
               key={allProspects.firebaseKey}
@@ -44,7 +38,9 @@ export default function WatchedProspect({ user }) {
 }
 
 WatchedProspect.propTypes = {
-  user: PropTypes.shape(PropTypes.obj),
+  user: PropTypes.oneOfType([
+    PropTypes.shape(PropTypes.obj),
+  ]),
 };
 
 WatchedProspect.defaultProps = {

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function DevLinks({ user }) {
   return (
     <>
-      {user?.isAdmin && (
+      {user?.isAdmin ? (
         <div>
           <Link className="nav-link active" to="/createProspects">
             Create Prospect
@@ -14,7 +14,7 @@ export default function DevLinks({ user }) {
             Create Team
           </Link>
         </div>
-      )}
+      ) : ('')}
     </>
   );
 }

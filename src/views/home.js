@@ -5,7 +5,7 @@ import ProspectCards from '../api/compontents/ProspectCard';
 import TeamCards from '../api/compontents/TeamCards';
 import { getPlayers, getSystems } from '../api/data/farmData';
 
-export default function Home({ user, watchInfo }) {
+export default function Home({ user }) {
   const [prospect, setProspects] = useState([]);
   const [teams, setTeams] = useState([]);
 
@@ -74,7 +74,6 @@ export default function Home({ user, watchInfo }) {
                   allTeams={allTeams}
                   setTeams={setTeams}
                   user={user}
-                  watchInfo={watchInfo}
                 />
               ))}
             </div>
@@ -88,16 +87,9 @@ export default function Home({ user, watchInfo }) {
 }
 
 Home.propTypes = {
-  watchInfo: PropTypes.shape({
-    firebaseKey: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
-    photoUrl: PropTypes.string.isRequired,
-    datePublished: PropTypes.string.isRequired,
-  }),
   user: PropTypes.shape(PropTypes.obj),
 };
 
 Home.defaultProps = {
-  watchInfo: undefined,
   user: null,
 };

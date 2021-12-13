@@ -19,12 +19,12 @@ export default function AllTeamCards({ allTeams, user, setTeams }) {
           <p>{allTeams.location}</p>
           <p>{allTeams.name}</p>
           <li>{allTeams.systemRanking}</li>
-          {user?.isAdmin && (
+          {user?.isAdmin ? (
             <Link to={`/editTeams/${allTeams.teamId}`} className="btn btn-success">
               <i className="far fa-edit" /> Edit
             </Link>
-          )}
-          {user?.isAdmin && (
+          ) : ('')}
+          {user?.isAdmin ? (
             <button
               type="button"
               className="btn btn-danger"
@@ -32,7 +32,7 @@ export default function AllTeamCards({ allTeams, user, setTeams }) {
             >
               <i className="far fa-edit" /> Delete
             </button>
-          )}
+          ) : ('')}
         </Card>
       </Container>
     </div>

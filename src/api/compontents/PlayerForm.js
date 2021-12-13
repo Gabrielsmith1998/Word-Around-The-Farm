@@ -162,7 +162,7 @@ export default function PlayerForm() {
     } else {
       createPlayer(formInput).then(() => {
         resetForm();
-        history.push('/');
+        history.push('/full-rankings');
       });
     }
   };
