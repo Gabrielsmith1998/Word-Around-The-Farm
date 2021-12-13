@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { getSinglePlayer } from '../api/data/farmData';
-import PlayerForm from '../api/compontents/PlayerForm';
+import { getSinglePost } from '../api/data/postData';
+import ScoutForm from '../api/compontents/ScoutForm';
 
-export default function EditProspect({ user }) {
+export default function EditPost({ user }) {
   const { firebaseKey } = useParams();
-  const [editProspect, setEditProspect] = useState({});
+  const [editPost, setEditPost] = useState({});
 
   useEffect(() => {
-    getSinglePlayer(firebaseKey).then(setEditProspect);
+    getSinglePost(firebaseKey).then(setEditPost);
   }, []);
 
   return (
     <>
-      {user?.isAdmin ? (
+      {user ? (
         <div className="form-container">
           <h1 className="page-header">Edit Prospects</h1>
-          <PlayerForm user={editProspect} />
+          <ScoutForm user={editPost} />
         </div>
       ) : ('')}
     </>
   );
 }
 
-EditProspect.propTypes = {
+EditPost.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
 };
 
-EditProspect.defaultProps = {
+EditPost.defaultProps = {
   user: null,
 };

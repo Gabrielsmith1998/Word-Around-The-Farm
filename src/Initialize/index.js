@@ -26,8 +26,19 @@ function Initialize() {
 
   return (
     <div>
-      <Navagation user={user} />
-      <Routes user={user} />
+      {user ? (
+        <>
+          {' '}
+          <Navagation user={user} />
+          <Routes user={user} />
+        </>
+      ) : (
+        <>
+          {' '}
+          <Navagation />
+          <Routes />
+        </>
+      )}
     </div>
   );
 }

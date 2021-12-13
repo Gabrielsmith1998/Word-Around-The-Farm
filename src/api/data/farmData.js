@@ -87,8 +87,11 @@ const watchProspect = (watchedId) => new Promise((resolve) => {
     });
 });
 
-const unwatchProspect = (firebaseKey) => new Promise((resolve) => {
-  axios.delete(`${baseURL}/watched-prospects/${firebaseKey}.json`).then(() => resolve({ firebaseKey }));
+const unwatchProspect = (firebaseKey) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${baseURL}/watched-prospects/${firebaseKey}.json`)
+    .then(() => getWatchedProspects().then(resolve))
+    .catch(reject);
 });
 
 const createPlayer = (obj) => new Promise((resolve, reject) => {

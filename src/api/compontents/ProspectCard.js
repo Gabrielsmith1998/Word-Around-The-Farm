@@ -1,48 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
   deleteProspect,
+  unwatchProspect,
+  userWatchedProspect,
   watchProspect,
 } from '../data/farmData';
 
 export default function ProspectCards({ allProspects, user, setProspects }) {
   const [details, setDetails] = useState(false);
+  const [watchedInfo, setWatchedInfo] = useState(false);
   const showDetails = () => {
     setDetails(!details);
   };
+
+  const getWatchInfo = () => userWatchedProspect(allProspects.firebaseKey).then(setWatchedInfo);
 
   const handleDelete = () => {
     deleteProspect(allProspects.firebaseKey).then((prospects) => setProspects(prospects));
   };
 
   const handleWatch = () => {
-    watchProspect(allProspects.firebaseKey);
+    if (watchedInfo) {
+      const info = watchedInfo;
+      setWatchedInfo(false);
+      if (info.watched) {
+        unwatchProspect(info.watchId).then(() => {
+          getWatchInfo();
+        });
+      } else {
+        watchProspect(allProspects.firebaseKey).then(() => {
+          getWatchInfo();
+        });
+      }
+    }
   };
+
+  useEffect(() => {
+    if (allProspects.firebaseKey) {
+      getWatchInfo();
+    }
+  }, [watchedInfo]);
 
   return (
     <div>
       <Container className="prospect-card-container">
         <Card className="prospect-cards">
           <p>{allProspects.name}</p>
-          <li>{allProspects.leagueRanking}</li>
-          {user && (
+          {allProspects?.leagueRanking ? (
+            <p>League Ranking {allProspects.leagueRanking}</p>
+          ) : ('')}
+          {user ? (
             <div>
               <button type="button" onClick={handleWatch}>
-                Watch Prospects
+                {watchedInfo.watched ? 'Watched' : 'Watch Prospect'}
               </button>
             </div>
-          )}
-          {user?.isAdmin && (
+          ) : ('')}
+          {user?.isAdmin ? (
             <Link
               to={`/edit/${allProspects.firebaseKey}`}
               className="btn btn-success"
             >
               <i className="far fa-edit" /> Edit
             </Link>
-          )}
-          {user?.isAdmin && (
+          ) : ('')}
+          {user?.isAdmin ? (
             <button
               type="button"
               className="btn btn-danger"
@@ -50,11 +75,11 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
             >
               <i className="far fa-edit" /> Delete
             </button>
-          )}
+          ) : ('')}
           <button onClick={showDetails} type="button">
             Player Grades
           </button>
-          {details && (
+          {details ? (
             <div className="details-modal">
               {allProspects.position === 'Pitcher' ? (
                 <div>
@@ -76,7 +101,7 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
                 Close
               </button>
             </div>
-          )}
+          ) : ('')}
         </Card>
       </Container>
     </div>
