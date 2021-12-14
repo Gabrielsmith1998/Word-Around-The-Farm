@@ -11,9 +11,11 @@ export default function Home({ user }) {
 
   useEffect(() => {
     let isMounted = true;
-    getPlayers().then((allProspects) => {
-      if (isMounted) setProspects(allProspects);
-    });
+    if (isMounted) {
+      getPlayers().then((allProspects) => {
+        setProspects(allProspects);
+      });
+    }
     return () => {
       isMounted = false;
     };

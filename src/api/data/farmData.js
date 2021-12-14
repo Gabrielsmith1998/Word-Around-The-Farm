@@ -40,13 +40,6 @@ const getSinglePlayer = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSinglePlayerTest = (firebaseKey) => new Promise((resolve, reject) => {
-  axios
-    .get(`${baseURL}/allProspects/${firebaseKey}.json`)
-    .then((response) => console.warn(response.data))
-    .catch(reject);
-});
-
 const teamsTopProspects = (teamId) => new Promise((resolve, reject) => {
   axios
     .get(`${baseURL}/allProspects.json?orderBy="teamId"&equalTo="${teamId}"`)
@@ -170,7 +163,6 @@ export {
   deleteTeam,
   getWatchedProspects,
   watchProspect,
-  getSinglePlayerTest,
   unwatchProspect,
   userWatchedProspect,
 };

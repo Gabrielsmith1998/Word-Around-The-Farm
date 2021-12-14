@@ -29,27 +29,31 @@ export default function PlayerForm() {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
     if (firebaseKey) {
-      getSinglePlayer(firebaseKey).then((obj) => {
-        setFormInput({
-          name: obj.name,
-          leagueRanking: obj.leagueRanking,
-          orgRanking: obj.orgRanking,
-          teamId: obj.teamId,
-          position: obj.position,
-          veloGrade: obj.veloGrade,
-          powerGrade: obj.powerGrade,
-          controlGrade: obj.controlGrade,
-          offSpeedGrade: obj.offSpeedGrade,
-          contactGrade: obj.contactGrade,
-          speedGrade: obj.speedGrade,
-          fieldingGrade: obj.fieldingGrade,
-          firebaseKey: obj.firebaseKey,
+      if (isMounted) {
+        getSinglePlayer(firebaseKey).then((obj) => {
+          setFormInput({
+            name: obj.name,
+            leagueRanking: obj.leagueRanking,
+            orgRanking: obj.orgRanking,
+            teamId: obj.teamId,
+            position: obj.position,
+            veloGrade: obj.veloGrade,
+            powerGrade: obj.powerGrade,
+            controlGrade: obj.controlGrade,
+            offSpeedGrade: obj.offSpeedGrade,
+            contactGrade: obj.contactGrade,
+            speedGrade: obj.speedGrade,
+            fieldingGrade: obj.fieldingGrade,
+            firebaseKey: obj.firebaseKey,
+          });
         });
-      });
-    } else {
-      setFormInput(initialState);
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
