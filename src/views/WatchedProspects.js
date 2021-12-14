@@ -9,7 +9,13 @@ export default function WatchedProspect({ user }) {
   const { uid } = useParams();
 
   useEffect(() => {
-    getWatchedProspects(uid).then(setProspects);
+    let isMounted = true;
+    if (isMounted) {
+      getWatchedProspects(uid).then(setProspects);
+    }
+    return () => {
+      isMounted = false;
+    };
   });
 
   const sortedProspects = prospect.sort((a, b) => a.orgRanking - b.orgRanking);

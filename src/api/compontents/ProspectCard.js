@@ -39,9 +39,15 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
   };
 
   useEffect(() => {
+    let isMounted = true;
     if (allProspects.firebaseKey) {
-      getWatchInfo();
+      if (isMounted) {
+        getWatchInfo();
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [watchedInfo]);
 
   return (
@@ -49,6 +55,7 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
       <Container className="prospect-card-container">
         <Card className="prospect-cards">
           <p>{allProspects.name}</p>
+          <p>{allProspects.position}</p>
           {allProspects?.leagueRanking ? (
             <p>League Ranking {allProspects.leagueRanking}</p>
           ) : ('')}
