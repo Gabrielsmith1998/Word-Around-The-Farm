@@ -64,7 +64,7 @@ export default function ScoutForm({ user }) {
   };
 
   return (
-    <div>
+    <div className="scout-form">
       <form onSubmit={handleSubmit}>
         <input
           className="search-bar"

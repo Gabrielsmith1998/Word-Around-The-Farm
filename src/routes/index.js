@@ -13,6 +13,8 @@ import WatchedProspect from '../views/WatchedProspects';
 import ScoutTalk from '../views/ScoutTalk';
 import ScoutForm from '../api/compontents/ScoutForm';
 import EditPost from '../views/EditScoutPost';
+import CountdownForm from '../api/compontents/CountdownForm';
+import EditCountdownView from '../views/EditCountdownView';
 
 export default function Routes({ user }) {
   return (
@@ -54,11 +56,19 @@ export default function Routes({ user }) {
         />
         <Route
           exact
+          path="/edit-countdown/:firebaseKey"
+          component={() => <EditCountdownView user={user} />}
+        />
+        <Route
+          exact
           path="/editTeams/:teamId"
           component={() => <EditTeam user={user} />}
         />
         <Route exact path="/createProspects">
           <PlayerForm user={user} />
+        </Route>
+        <Route exact path="/createCountdown">
+          <CountdownForm user={user} />
         </Route>
         <Route exact path="/createTeams">
           <TeamForm user={user} />

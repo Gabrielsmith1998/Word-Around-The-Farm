@@ -172,7 +172,7 @@ export default function PlayerForm() {
   };
 
   return (
-    <div>
+    <div className="prospect-form">
       <form onSubmit={handleSubmit}>
         <input
           className="search-bar"

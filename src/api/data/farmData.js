@@ -148,6 +148,42 @@ const deleteProspect = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getCountdown = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseURL}/countdown.json`)
+    .then((response) => {
+      resolve(Object.values(response.data));
+    })
+    .catch(reject);
+});
+
+const getSingleCountdown = (firebaseKey) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseURL}/countdown/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch(reject);
+});
+
+const updateCountdown = (obj) => new Promise((resolve, reject) => {
+  axios.patch(`${baseURL}/countdown/${obj.firebaseKey}.json`, obj)
+    .then(() => getCountdown().then(resolve))
+    .catch(reject);
+});
+
+const createCountdown = (obj) => new Promise((resolve, reject) => {
+  axios
+    .post(`${baseURL}/countdown.json`, obj)
+    .then((response) => {
+      const firebaseKey = response.data.name;
+      axios
+        .patch(`${baseURL}/countdown/${firebaseKey}.json`, { firebaseKey })
+        .then(() => {
+          getCountdown().then(resolve);
+        });
+    })
+    .catch(reject);
+});
+
 export {
   getPlayers,
   getSystems,
@@ -165,4 +201,8 @@ export {
   watchProspect,
   unwatchProspect,
   userWatchedProspect,
+  getCountdown,
+  updateCountdown,
+  createCountdown,
+  getSingleCountdown,
 };

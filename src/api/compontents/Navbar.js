@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Navbar } from 'reactstrap';
+import {
+  Navbar,
+  NavLink,
+} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { signInUser, signOutUser } from '../auth';
 
@@ -12,40 +15,38 @@ export default function Navagation({ user }) {
   };
 
   return (
-    <div className="routes">
+    <div className="farm-navbar">
       <Navbar>
-        <button
-          className="btn btn-light"
-          type="button"
-          onClick={() => history.push('/')}
+        <NavLink
+          className="navFarmLink"
+          href="/"
         >
           Home
-        </button>
+        </NavLink>
         {user?.isAdmin ? (
-          <button
-            className="btn btn-info"
-            type="button"
-            onClick={() => history.push('/devPortal')}
+          <NavLink
+            className="navFarmLink"
+            href="/devPortal"
           >
             Dev Portal
-          </button>
-        ) : ('')}
+          </NavLink>
+        ) : (
+          ''
+        )}
         {user ? (
           <>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => history.push(`/watched-prospects/${user.uid}`)}
+            <NavLink
+              className="navFarmLink"
+              href={`/watched-prospects/${user.uid}`}
             >
               My Watched Prospects
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => history.push('/scout-talk')}
+            </NavLink>
+            <NavLink
+              className="navFarmLink"
+              href="/scout-talk"
             >
               Scout Talk
-            </button>
+            </NavLink>
             <button
               type="button"
               className="btn btn-danger"
