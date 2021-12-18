@@ -1,4 +1,6 @@
 # Word Around The Farm
+<img width="1440" alt="Screen Shot 2021-12-18 at 11 13 20 AM" src="https://user-images.githubusercontent.com/86996271/146649870-e19ae373-7d93-4612-b77c-b832201d8689.png">
+
 
 > The user of this application would be a baseball nerd trying to stay up to date with latest minor league prospects.
 
@@ -8,8 +10,6 @@
 ## [WATF WIREFRAME](https://docs.google.com/presentation/d/1DdvKKm1SAfQLc6G2ReMyjFjQ1G4Wwq_mQXn1Fi5pCk4/edit?usp=sharing)
 
 # Word Around The Farm: Authentication and Routing
-<img width="1440" alt="Screen Shot 2021-12-18 at 11 13 20 AM" src="https://user-images.githubusercontent.com/86996271/146649870-e19ae373-7d93-4612-b77c-b832201d8689.png">
-
 ## User Stories - Authentication
 
 * As a user, if I go to the application and I am not logged in, I should see the application with a google authentication button in the NavBar.
