@@ -23,27 +23,22 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
   };
 
   const handleWatch = () => {
-    if (watchedInfo) {
-      const info = watchedInfo;
-      setWatchedInfo(false);
-      if (info.watched) {
-        unwatchProspect(info.watchId).then(() => {
-          getWatchInfo();
-        });
-      } else {
-        watchProspect(allProspects.firebaseKey).then(() => {
-          getWatchInfo();
-        });
-      }
+    const info = watchedInfo;
+    if (info.watched) {
+      unwatchProspect(info.watchId).then(() => {
+        getWatchInfo();
+      });
+    } else {
+      watchProspect(allProspects.firebaseKey).then(() => {
+        getWatchInfo();
+      });
     }
   };
 
   useEffect(() => {
     let isMounted = true;
     if (allProspects.firebaseKey) {
-      if (isMounted) {
-        getWatchInfo();
-      }
+      if (isMounted) getWatchInfo();
     }
     return () => {
       isMounted = false;
@@ -51,21 +46,25 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
   }, [watchedInfo]);
 
   return (
-    <div>
+    <div className="prospect-div">
       <Container className="prospect-card-container">
         <Card className="prospect-cards">
           <p>{allProspects.name}</p>
           <p>{allProspects.position}</p>
           {allProspects?.leagueRanking ? (
             <p>League Ranking {allProspects.leagueRanking}</p>
-          ) : ('')}
+          ) : (
+            ''
+          )}
           {user ? (
             <div>
               <button type="button" onClick={handleWatch}>
                 {watchedInfo.watched ? 'Watched' : 'Watch Prospect'}
               </button>
             </div>
-          ) : ('')}
+          ) : (
+            ''
+          )}
           {user?.isAdmin ? (
             <Link
               to={`/edit/${allProspects.firebaseKey}`}
@@ -73,7 +72,9 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
             >
               <i className="far fa-edit" /> Edit
             </Link>
-          ) : ('')}
+          ) : (
+            ''
+          )}
           {user?.isAdmin ? (
             <button
               type="button"
@@ -82,7 +83,9 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
             >
               <i className="far fa-edit" /> Delete
             </button>
-          ) : ('')}
+          ) : (
+            ''
+          )}
           <button onClick={showDetails} type="button">
             Player Grades
           </button>
@@ -108,7 +111,9 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
                 Close
               </button>
             </div>
-          ) : ('')}
+          ) : (
+            ''
+          )}
         </Card>
       </Container>
     </div>

@@ -74,7 +74,6 @@ const watchProspect = (watchedId) => new Promise((resolve) => {
     uid,
   })
     .then((response) => {
-      console.warn(response.data);
       const fbKey = { firebaseKey: response.data.name };
       axios.patch(`${baseURL}/watched-prospects/${response.data.name}.json`, fbKey).then(() => resolve({ watchedId }));
     });

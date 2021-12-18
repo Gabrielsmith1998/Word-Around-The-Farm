@@ -9,10 +9,62 @@ body {
   background-size: cover;
 }
 
+.watched-header {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+.top-5-header {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+.scout-div {
+  display: flex;
+  flex-wrap: wrap !important;
+  justify-content: center;
+
+  .scout-cards {
+    margin: 10px;
+    // background-color: rgb(255, 255, 255);
+    background-image: url('https://www.woodcraft.com/product_images/ash-baseball-bat-billet/584515bc69702d19cc000afb/detail.jpg?c=1480922556');
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: red;
+    text-align: center;
+    width: 150px;
+    color: black;
+    font-family: 'Mohave', sans-serif;
+    align-items: center;
+
+    .btn {
+      margin: 10px;
+    }
+  }
+}
+.scout-header {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  margin: 10px;
+}
+
 .prospect-div {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
   justify-content: center;
+
+  .full-rankings {
+    font-family: 'Mohave', sans-serif;
+    color: white;
+    margin: 15px;
+    font-size: 20px;
+  }
 
   .prospect-cards {
     margin: 10px;
@@ -45,6 +97,13 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 
+  .full-rankings {
+    font-family: 'Mohave', sans-serif;
+    color: white;
+    margin: 15px;
+    font-size: 20px;
+  }
+
   .team-cards {
     color:black;
     border-radius: 5px;
@@ -53,9 +112,9 @@ body {
     text-align: center;
     background-image: url('https://www.woodcraft.com/product_images/ash-baseball-bat-billet/584515bc69702d19cc000afb/detail.jpg?c=1480922556');
     margin: 10px;
-    width: 120px;
-    height: 200px;
+    height: fit-content;
     font-family: 'Mohave', sans-serif;
+    width: fit-content;
 
     .btn {
       margin: 10px;

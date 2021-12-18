@@ -89,7 +89,7 @@ export default function Home({ user }) {
         {teams ? (
           <>
             <h1 className="top-10-farm">Top 10 Farm Systems</h1>
-            <Link className="nav-link active" to="/full-rankings">
+            <Link className="full-rankings" to="/full-rankings">
               Full Rankings
             </Link>
             <div className="d-flex flex-wrap">
