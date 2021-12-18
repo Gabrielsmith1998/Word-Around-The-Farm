@@ -16,6 +16,20 @@ body {
   font-size: 50px;
 }
 
+.full-header {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+.dev-links {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
 .top-5-header {
   font-family: 'Gloria Hallelujah', cursive;
   text-align: center;
@@ -166,4 +180,23 @@ body {
   padding: 3em;
   text-align: center;
   margin: 5px;
+}
+
+.scout-form {
+  .search-bar {
+    margin: 10px;
+  }
+
+  .text-box {
+    height: 100px;
+    margin: 10px;
+  }
+
+  .btn {
+    margin: 10px;
+  }
+}
+
+.btn-secondary {
+  margin: 20px;
 }

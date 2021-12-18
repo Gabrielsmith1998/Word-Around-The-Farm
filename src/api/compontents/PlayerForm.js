@@ -166,7 +166,7 @@ export default function PlayerForm() {
     } else {
       createPlayer(formInput).then(() => {
         resetForm();
-        history.push('/full-rankings');
+        history.push('/');
       });
     }
   };

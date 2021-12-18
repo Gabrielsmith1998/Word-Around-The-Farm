@@ -65,19 +65,21 @@ export default function ScoutForm({ user }) {
 
   return (
     <div className="scout-form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="scout-form">
         <input
           className="search-bar"
           placeholder="Post Title"
           onChange={handleTitle}
           value={formInput.title}
         />
+        <br />
         <input
-          className="search-bar"
+          className="text-box"
           placeholder="Post Description"
           onChange={handleDescription}
           value={formInput.description}
         />
+        <br />
         <button type="submit" className="btn btn-success">
           Submit
         </button>
