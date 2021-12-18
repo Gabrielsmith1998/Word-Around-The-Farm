@@ -2,6 +2,8 @@
 
 > The user of this application would be a baseball nerd trying to stay up to date with latest minor league prospects.
 
+### [Deployed App](https://word-around-the-farm.netlify.app/)
+
 ## [WATF ERD](https://dbdiagram.io/d/61a3dd308c901501c0d623a5)
 ## [WATF WIREFRAME](https://docs.google.com/presentation/d/1DdvKKm1SAfQLc6G2ReMyjFjQ1G4Wwq_mQXn1Fi5pCk4/edit?usp=sharing)
 
