@@ -25,7 +25,7 @@ export default function FullSystemRankings({ user }) {
     <div>
       {teams ? (
         <>
-          <h1 className="text-center">Full System Rankings</h1>
+          <h1 className="full-header">Full System Rankings</h1>
           <div className="d-flex flex-wrap">
             {systemRanked.map((allTeams) => (
               <AllTeamCards

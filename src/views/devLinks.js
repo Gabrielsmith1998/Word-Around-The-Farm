@@ -7,10 +7,11 @@ export default function DevLinks({ user }) {
     <>
       {user?.isAdmin ? (
         <div>
-          <Link className="nav-link active" to="/createProspects">
+          <Link className="dev-links" to="/createProspects">
             Create Prospect
           </Link>
-          <Link className="nav-link active" to="/createTeams">
+          <br />
+          <Link className="dev-links" to="/createTeams">
             Create Team
           </Link>
         </div>
