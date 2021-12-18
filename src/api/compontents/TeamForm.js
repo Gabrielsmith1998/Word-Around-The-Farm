@@ -75,7 +75,7 @@ export default function TeamForm() {
   };
 
   return (
-    <div>
+    <div className="team-form">
       <form onSubmit={handleSubmit}>
         <input
           className="search-bar"

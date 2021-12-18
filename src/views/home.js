@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProspectCards from '../api/compontents/ProspectCard';
 import TeamCards from '../api/compontents/TeamCards';
-import { getPlayers, getSystems } from '../api/data/farmData';
+import { getCountdown, getPlayers, getSystems } from '../api/data/farmData';
+import Countdown from './Countdown';
 
 export default function Home({ user }) {
+  const [countdownDates, setCountdowndates] = useState([]);
   const [prospect, setProspects] = useState([]);
   const [teams, setTeams] = useState([]);
 
@@ -31,6 +33,18 @@ export default function Home({ user }) {
     };
   }, []);
 
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      getCountdown().then((dates) => {
+        setCountdowndates(dates);
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const sorted = prospect.sort((a, b) => a.leagueRanking - b.leagueRanking);
   const leagueRanked = sorted.filter(
     (allProspects) => allProspects.leagueRanking <= 10 && allProspects.leagueRanking >= 1,
@@ -42,11 +56,20 @@ export default function Home({ user }) {
   );
 
   return (
-    <div>
+    <div className="prospect-div">
+      {countdownDates ? (
+        <>
+          {countdownDates.map((dates) => (
+            <Countdown dates={dates} key={dates.firebaseKey} user={user} setCountdowndates={setCountdowndates} />
+          ))}
+        </>
+      ) : (
+        ''
+      )}
       {prospect ? (
         <>
           <div>
-            <h1 className="text-center">Top 10 Prospects</h1>
+            <h1 className="top-10-prospect">Top 10 Prospects</h1>
             <div className="d-flex flex-wrap">
               {leagueRanked.map((allProspects) => (
                 <ProspectCards
@@ -62,10 +85,10 @@ export default function Home({ user }) {
       ) : (
         ''
       )}
-      <div>
+      <div className="team-div">
         {teams ? (
           <>
-            <h1 className="text-center">Top 10 Farm Systems</h1>
+            <h1 className="top-10-farm">Top 10 Farm Systems</h1>
             <Link className="nav-link active" to="/full-rankings">
               Full Rankings
             </Link>

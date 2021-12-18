@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Card, Container } from 'reactstrap';
 import { deletePost } from '../data/postData';
-// import { deletePost } from '../data/postData';
 
 export default function ScoutCards({ allPosts, user, setPosts }) {
   const handleDelete = () => {
@@ -11,7 +10,7 @@ export default function ScoutCards({ allPosts, user, setPosts }) {
   };
 
   return (
-    <div>
+    <div className="scout-cards">
       {user ? (
         <Container className="team-card-container">
           <Card className="team-cards">
