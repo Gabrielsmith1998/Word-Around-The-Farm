@@ -10,7 +10,7 @@ export default function AllTeamCards({ allTeams, user, setTeams }) {
   };
 
   return (
-    <div>
+    <div className="team-div">
       <Container className="team-card-container">
         <Card className="team-cards">
           <Link className="nav-link active" to={`/top-5-prospects/${allTeams.teamId}`}>

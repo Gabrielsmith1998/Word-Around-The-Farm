@@ -10,10 +10,10 @@ export default function ScoutCards({ allPosts, user, setPosts }) {
   };
 
   return (
-    <div className="scout-cards">
+    <div className="scout-div">
       {user ? (
-        <Container className="team-card-container">
-          <Card className="team-cards">
+        <Container className="scout-card-container">
+          <Card className="scout-cards">
             <h5>{allPosts.title}</h5>
             <p>{allPosts.description}</p>
 

@@ -23,7 +23,7 @@ export default function ScoutTalk({ user }) {
     <div>
       {posts ? (
         <>
-          <h1 className="text-center">Scout Talk</h1>
+          <h1 className="scout-header">Scout Talk</h1>
           <button
             type="button"
             className="btn btn-secondary"

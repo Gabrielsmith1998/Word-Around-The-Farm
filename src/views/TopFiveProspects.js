@@ -19,26 +19,26 @@ export default function TopFiveProspects({ user }) {
 
   return (
     <>
-      {prospect ? (
-        <>
-          <Link
-            className="nav-link active"
-            to="/full-rankings"
-          >
-            Back
-          </Link>
-          {prospectRanked.map((allProspects) => (
-            <ProspectCards
-              key={allProspects.firebaseKey}
-              setProspects={setProspects}
-              allProspects={allProspects}
-              user={user}
-            />
-          ))}
-        </>
-      ) : (
-        ''
-      )}
+      <h1 className="top-5-header">Top Five Prospects</h1>
+      <div className="prospect-div">
+        {prospect ? (
+          <>
+            <Link className="full-rankings" to="/full-rankings">
+              Back
+            </Link>
+            {prospectRanked.map((allProspects) => (
+              <ProspectCards
+                key={allProspects.firebaseKey}
+                setProspects={setProspects}
+                allProspects={allProspects}
+                user={user}
+              />
+            ))}
+          </>
+        ) : (
+          ''
+        )}
+      </div>
     </>
   );
 }

@@ -10,9 +10,9 @@ export default function WatchedProspect({ user }) {
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) {
-      getWatchedProspects(uid).then(setProspects);
-    }
+    getWatchedProspects(uid).then((allProspects) => {
+      if (isMounted) setProspects(allProspects);
+    });
     return () => {
       isMounted = false;
     };
@@ -25,28 +25,29 @@ export default function WatchedProspect({ user }) {
 
   return (
     <>
-      {prospect ? (
-        <>
-          {prospectRanked.map((allProspects) => (
-            <ProspectCards
-              key={allProspects.firebaseKey}
-              setProspects={setProspects}
-              allProspects={allProspects}
-              user={user}
-            />
-          ))}
-        </>
-      ) : (
-        ''
-      )}
+      <h1 className="watched-header">My Watched Prospects</h1>
+      <div className="prospect-div">
+        {prospect ? (
+          <>
+            {prospectRanked.map((allProspects) => (
+              <ProspectCards
+                key={allProspects.firebaseKey}
+                setProspects={setProspects}
+                allProspects={allProspects}
+                user={user}
+              />
+            ))}
+          </>
+        ) : (
+          ''
+        )}
+      </div>
     </>
   );
 }
 
 WatchedProspect.propTypes = {
-  user: PropTypes.oneOfType([
-    PropTypes.shape(PropTypes.obj),
-  ]),
+  user: PropTypes.oneOfType([PropTypes.shape(PropTypes.obj)]),
 };
 
 WatchedProspect.defaultProps = {
