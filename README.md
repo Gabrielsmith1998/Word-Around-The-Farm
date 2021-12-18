@@ -6,6 +6,7 @@
 ## [WATF WIREFRAME](https://docs.google.com/presentation/d/1DdvKKm1SAfQLc6G2ReMyjFjQ1G4Wwq_mQXn1Fi5pCk4/edit?usp=sharing)
 
 # Word Around The Farm: Authentication and Routing
+<img width="1440" alt="Screen Shot 2021-12-18 at 11 13 20 AM" src="https://user-images.githubusercontent.com/86996271/146649870-e19ae373-7d93-4612-b77c-b832201d8689.png">
 
 ## User Stories - Authentication
 
@@ -32,6 +33,7 @@
 
 ### CREATE
 * As an admin user, when I click on Create Prospect or Create Team, I should be navigated to either /createProspects or /createTeams which will display a form for creation based on the selected type.
+<img width="1440" alt="Screen Shot 2021-12-18 at 11 14 07 AM" src="https://user-images.githubusercontent.com/86996271/146649884-0e6b2847-8010-4c70-8642-f46f3e3d70d1.png">
 
 ### READ
 * As a user, when I navigate to the /home, /my-watched-prospects and /scout-talk route, I should see the data that pertains to those specific views.
@@ -39,7 +41,8 @@
 
 ### UPDATE
 * As an Admin user, when I click on the Edit button on either the prospect card or team card, I should be redirected to either the editProspect page or editTeam page and should see a form pre-populated with all the information for the specific item I am editing.  Once I make edits and push the save button, Firebase should edit and I should be redirected to the '/home' page.
-* 
+<img width="1440" alt="Screen Shot 2021-12-18 at 11 15 38 AM" src="https://user-images.githubusercontent.com/86996271/146649901-73e95b82-2ecc-4ff8-a529-223790680b49.png">
+
 * As an Authenticated user, when I click on the Edit button on my scout talk posts, I should be redirected to either the editPost page and should see a form pre-populated with all the information for the specific post I am editing.  Once I make edits and push the save button, Firebase should edit and I should be redirected to the '/scout-talk' page.
 
 ### DELETE
