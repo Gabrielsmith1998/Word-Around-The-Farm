@@ -53,3 +53,5 @@
 * As an Admin user, when I click the Delete button on the team card, the team will get deleted from the firebase database and the page will update with the remaining teams.
 
 * As an Authenticatied user, when I click the Delete button on the scout post card, the post will get deleted from the firebase database and the page will update with the remaining posts.
+
+## [LOOM VIDEO](https://www.loom.com/share/36f64d1b05c74985820e8b919e9ee100)
