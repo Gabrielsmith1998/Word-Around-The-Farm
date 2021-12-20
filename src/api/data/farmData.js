@@ -49,7 +49,7 @@ const teamsTopProspects = (teamId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const userWatchedProspect = async (watchedId) => {
+const userWatchesProspect = async (watchedId) => {
   const prospectWatchers = await axios.get(`${baseURL}/watched-prospects.json?orderBy="watchedId"&equalTo="${watchedId}"`).then((response) => Object.values(response.data));
   const uid = getCurrentUsersUid();
   const watched = prospectWatchers.find((prospect) => prospect.uid === uid);
@@ -63,11 +63,11 @@ const userWatchedProspect = async (watchedId) => {
 const getWatchedProspects = async (uid) => {
   const userWatched = await axios.get(`${baseURL}/watched-prospects.json?orderBy="uid"&equalTo="${uid}"`).then((response) => Object.values(response.data)).then((watched) => watched.map((obj) => obj.watchedId));
   const players = await getPlayers();
-  const userWatchesProspect = players.filter((prospect) => userWatched.includes(prospect.firebaseKey));
-  return userWatchesProspect;
+  const usersWatchedProspect = players.filter((prospect) => userWatched.includes(prospect.firebaseKey));
+  return usersWatchedProspect;
 };
 
-const watchProspect = (watchedId) => new Promise((resolve) => {
+const watchProspect = (watchedId) => new Promise((resolve, reject) => {
   const uid = getCurrentUsersUid();
   axios.post(`${baseURL}/watched-prospects.json`, {
     watchedId,
@@ -76,7 +76,8 @@ const watchProspect = (watchedId) => new Promise((resolve) => {
     .then((response) => {
       const fbKey = { firebaseKey: response.data.name };
       axios.patch(`${baseURL}/watched-prospects/${response.data.name}.json`, fbKey).then(() => resolve({ watchedId }));
-    });
+    })
+    .catch(reject);
 });
 
 const unwatchProspect = (firebaseKey) => new Promise((resolve, reject) => {
@@ -199,7 +200,7 @@ export {
   getWatchedProspects,
   watchProspect,
   unwatchProspect,
-  userWatchedProspect,
+  userWatchesProspect,
   getCountdown,
   updateCountdown,
   createCountdown,

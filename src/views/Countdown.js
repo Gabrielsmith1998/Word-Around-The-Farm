@@ -32,7 +32,7 @@ export default function Countdown({ dates, user }) {
         setTimerMinutes(minutes);
         setTimerSeconds(seconds);
       }
-    }, 1000);
+    });
   };
 
   useEffect(() => {
