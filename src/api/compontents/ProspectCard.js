@@ -5,31 +5,32 @@ import { Link } from 'react-router-dom';
 import {
   deleteProspect,
   unwatchProspect,
-  userWatchedProspect,
+  userWatchesProspect,
   watchProspect,
 } from '../data/farmData';
 
-export default function ProspectCards({ allProspects, user, setProspects }) {
+export default function ProspectCards({ prospect, user, setProspects }) {
   const [details, setDetails] = useState(false);
   const [watchedInfo, setWatchedInfo] = useState(false);
   const showDetails = () => {
     setDetails(!details);
   };
 
-  const getWatchInfo = () => userWatchedProspect(allProspects.firebaseKey).then(setWatchedInfo);
+  const getWatchInfo = () => {
+    userWatchesProspect(prospect.firebaseKey).then((watched) => setWatchedInfo(watched));
+  };
 
   const handleDelete = () => {
-    deleteProspect(allProspects.firebaseKey).then((prospects) => setProspects(prospects));
+    deleteProspect(prospect.firebaseKey).then((prospects) => setProspects(prospects));
   };
 
   const handleWatch = () => {
-    const info = watchedInfo;
-    if (info.watched) {
-      unwatchProspect(info.watchId).then(() => {
+    if (watchedInfo.watched) {
+      unwatchProspect(watchedInfo.watchId).then(() => {
         getWatchInfo();
       });
     } else {
-      watchProspect(allProspects.firebaseKey).then(() => {
+      watchProspect(prospect.firebaseKey).then(() => {
         getWatchInfo();
       });
     }
@@ -37,7 +38,7 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
 
   useEffect(() => {
     let isMounted = true;
-    if (allProspects.firebaseKey) {
+    if (prospect.firebaseKey) {
       if (isMounted) getWatchInfo();
     }
     return () => {
@@ -49,10 +50,10 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
     <div className="prospect-div">
       <Container className="prospect-card-container">
         <Card className="prospect-cards">
-          <p>{allProspects.name}</p>
-          <p>{allProspects.position}</p>
-          {allProspects?.leagueRanking ? (
-            <p>League Ranking {allProspects.leagueRanking}</p>
+          <p>{prospect.name}</p>
+          <p>{prospect.position}</p>
+          {prospect?.leagueRanking ? (
+            <p>League Ranking {prospect.leagueRanking}</p>
           ) : (
             ''
           )}
@@ -67,7 +68,7 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
           )}
           {user?.isAdmin ? (
             <Link
-              to={`/edit/${allProspects.firebaseKey}`}
+              to={`/edit/${prospect.firebaseKey}`}
               className="btn btn-success"
             >
               <i className="far fa-edit" /> Edit
@@ -91,20 +92,20 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
           </button>
           {details ? (
             <div className="details-modal">
-              {allProspects.position === 'Pitcher' ? (
+              {prospect.position === 'Pitcher' ? (
                 <div>
                   <h5>Pitching Grades</h5>
-                  <p>Velo: {allProspects.veloGrade}</p>
-                  <p>Control: {allProspects.controlGrade}</p>
-                  <p>Offspeed: {allProspects.offSpeedGrade}</p>
+                  <p>Velo: {prospect.veloGrade}</p>
+                  <p>Control: {prospect.controlGrade}</p>
+                  <p>Offspeed: {prospect.offSpeedGrade}</p>
                 </div>
               ) : (
                 <div>
                   <h5>Position Grades</h5>
-                  <p>Power: {allProspects.powerGrade}</p>
-                  <p>Contact: {allProspects.contactGrade}</p>
-                  <p>Speed: {allProspects.speedGrade}</p>
-                  <p>Fielding: {allProspects.fieldingGrade}</p>
+                  <p>Power: {prospect.powerGrade}</p>
+                  <p>Contact: {prospect.contactGrade}</p>
+                  <p>Speed: {prospect.speedGrade}</p>
+                  <p>Fielding: {prospect.fieldingGrade}</p>
                 </div>
               )}
               <button onClick={showDetails} type="button">
@@ -123,7 +124,7 @@ export default function ProspectCards({ allProspects, user, setProspects }) {
 ProspectCards.propTypes = {
   user: PropTypes.shape(PropTypes.obj),
   setProspects: PropTypes.func.isRequired,
-  allProspects: PropTypes.shape(PropTypes.obj).isRequired,
+  prospect: PropTypes.shape(PropTypes.obj).isRequired,
 };
 
 ProspectCards.defaultProps = {

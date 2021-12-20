@@ -8,7 +8,7 @@ import Countdown from './Countdown';
 
 export default function Home({ user }) {
   const [countdownDates, setCountdowndates] = useState([]);
-  const [prospect, setProspects] = useState([]);
+  const [prospects, setProspects] = useState([]);
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Home({ user }) {
     };
   }, []);
 
-  const sorted = prospect.sort((a, b) => a.leagueRanking - b.leagueRanking);
+  const sorted = prospects.sort((a, b) => a.leagueRanking - b.leagueRanking);
   const leagueRanked = sorted.filter(
     (allProspects) => allProspects.leagueRanking <= 10 && allProspects.leagueRanking >= 1,
   );
@@ -60,21 +60,21 @@ export default function Home({ user }) {
       {countdownDates ? (
         <>
           {countdownDates.map((dates) => (
-            <Countdown dates={dates} key={dates.firebaseKey} user={user} setCountdowndates={setCountdowndates} />
+            <Countdown dates={dates} key={dates.firebaseKey} user={user} />
           ))}
         </>
       ) : (
         ''
       )}
-      {prospect ? (
+      {prospects ? (
         <>
           <div>
             <h1 className="top-10-prospect">Top 10 Prospects</h1>
             <div className="d-flex flex-wrap">
-              {leagueRanked.map((allProspects) => (
+              {leagueRanked.map((prospect) => (
                 <ProspectCards
-                  key={allProspects.firebaseKey}
-                  allProspects={allProspects}
+                  key={prospect.firebaseKey}
+                  prospect={prospect}
                   setProspects={setProspects}
                   user={user}
                 />

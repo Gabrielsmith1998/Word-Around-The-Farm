@@ -5,7 +5,7 @@ import ProspectCards from '../api/compontents/ProspectCard';
 import { getWatchedProspects } from '../api/data/farmData';
 
 export default function WatchedProspect({ user }) {
-  const [prospect, setProspects] = useState([]);
+  const [prospects, setProspects] = useState([]);
   const { uid } = useParams();
 
   useEffect(() => {
@@ -18,22 +18,22 @@ export default function WatchedProspect({ user }) {
     };
   });
 
-  const sortedProspects = prospect.sort((a, b) => a.orgRanking - b.orgRanking);
+  const sortedProspects = prospects.sort((a, b) => a.orgRanking - b.orgRanking);
   const prospectRanked = sortedProspects.filter(
-    (allProspects) => allProspects.orgRanking <= 5,
+    (prospect) => prospect.orgRanking <= 5,
   );
 
   return (
     <>
       <h1 className="watched-header">My Watched Prospects</h1>
       <div className="prospect-div">
-        {prospect ? (
+        {prospects ? (
           <>
-            {prospectRanked.map((allProspects) => (
+            {prospectRanked.map((prospect) => (
               <ProspectCards
-                key={allProspects.firebaseKey}
+                key={prospect.firebaseKey}
                 setProspects={setProspects}
-                allProspects={allProspects}
+                prospect={prospect}
                 user={user}
               />
             ))}
