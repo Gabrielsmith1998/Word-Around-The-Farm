@@ -5,14 +5,14 @@ import ProspectCards from '../api/compontents/ProspectCard';
 import { teamsTopProspects } from '../api/data/farmData';
 
 export default function TopFiveProspects({ user }) {
-  const [prospect, setProspects] = useState([]);
+  const [prospects, setProspects] = useState([]);
   const { teamId } = useParams();
 
   useEffect(() => {
     teamsTopProspects(teamId).then(setProspects);
   });
 
-  const sortedProspects = prospect.sort((a, b) => a.orgRanking - b.orgRanking);
+  const sortedProspects = prospects.sort((a, b) => a.orgRanking - b.orgRanking);
   const prospectRanked = sortedProspects.filter(
     (allProspects) => allProspects.orgRanking <= 5,
   );
@@ -21,19 +21,24 @@ export default function TopFiveProspects({ user }) {
     <>
       <h1 className="top-5-header">Top Five Prospects</h1>
       <div className="prospect-div">
-        {prospect ? (
+        {prospects ? (
           <>
             <Link className="full-rankings" to="/full-rankings">
               Back
             </Link>
-            {prospectRanked.map((allProspects) => (
-              <ProspectCards
-                key={allProspects.firebaseKey}
-                setProspects={setProspects}
-                allProspects={allProspects}
-                user={user}
-              />
-            ))}
+            <>
+              {prospectRanked.map((prospect) => (
+                <div>
+                  <h5>{prospect.orgRanking}.</h5>
+                  <ProspectCards
+                    key={prospect.firebaseKey}
+                    setProspect={setProspects}
+                    prospect={prospect}
+                    user={user}
+                  />
+                </div>
+              ))}
+            </>
           </>
         ) : (
           ''
